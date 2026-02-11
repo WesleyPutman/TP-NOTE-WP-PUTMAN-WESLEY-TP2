@@ -1,0 +1,367 @@
+/* =========================================
+   0. VARIABLES & RESET (Style Tailwind)
+   ========================================= */
+:root {
+    /* Palette de couleurs "Slate" (Gris bleuté moderne) */
+    --bg-body: #f8fafc;       /* Slate 50 */
+    --bg-card: #ffffff;       /* White */
+    --text-main: #1e293b;     /* Slate 800 (Titres) */
+    --text-body: #64748b;     /* Slate 500 (Texte) */
+    --border-color: #e2e8f0;  /* Slate 200 */
+    
+    /* Couleur Primaire (Bleu "Sky" outdoor) */
+    --primary: #0ea5e9;       
+    --primary-hover: #0284c7; 
+    
+    /* Ombres douces */
+    --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+    --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    
+    /* Arrondis */
+    --radius-md: 0.5rem;   /* 8px */
+    --radius-lg: 0.75rem;  /* 12px */
+    --radius-xl: 1rem;     /* 16px */
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-body);
+    line-height: 1.6;
+    margin: 0;
+    -webkit-font-smoothing: antialiased; /* Rendu de texte plus net sur Mac */
+}
+
+h1, h2, h3, h4 {
+    color: var(--text-main);
+    font-weight: 700;
+    margin-top: 0;
+    letter-spacing: -0.025em; /* Tracking "tight" de Tailwind */
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    transition: color 0.2s;
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* =========================================
+   1. CONTAINER & GRILLE GLOBAL
+   ========================================= */
+.container, .archive-container, .single-container {
+    max-width: 1280px; /* max-w-7xl */
+    margin: 0 auto;
+    padding: 2rem 1.5rem;
+}
+
+/* Headers de section centrés */
+.archive-header, section h2 {
+    text-align: center;
+    margin-bottom: 3rem;
+    position: relative;
+}
+
+.archive-header h1, section h2 {
+    font-size: 2.25rem; /* text-4xl */
+    line-height: 2.5rem;
+}
+
+/* Grille Responsive */
+.rando-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); /* Cartes un peu plus larges */
+    gap: 2rem; /* gap-8 */
+}
+
+/* =========================================
+   2. CARTE RANDONNÉE (Design Card)
+   ========================================= */
+.rando-card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-sm);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    transition: all 0.3s ease;
+}
+
+.rando-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: #cbd5e1;
+}
+
+/* Image de la carte */
+.rando-img-wrapper, .rando-img-link {
+    height: 220px;
+    position: relative;
+    overflow: hidden;
+    background-color: #f1f5f9;
+}
+
+.rando-img-wrapper img, .rando-img-link img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.rando-card:hover img {
+    transform: scale(1.05);
+}
+
+/* Contenu de la carte */
+.rando-content {
+    padding: 1.5rem; /* p-6 */
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+}
+
+.rando-content h2, .rando-content h3 {
+    font-size: 1.25rem; /* text-xl */
+    margin-bottom: 0.75rem;
+    line-height: 1.35;
+}
+
+.rando-content h2 a:hover, .rando-content h3 a:hover {
+    color: var(--primary);
+}
+
+/* Méta (Distance / Durée) */
+.rando-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+    font-size: 0.875rem; /* text-sm */
+    font-weight: 500;
+    color: #64748b;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background-color: #f1f5f9; /* Fond gris très clair */
+    padding: 4px 10px;
+    border-radius: 9999px; /* Pill shape */
+}
+
+.meta-item .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: var(--primary); /* Icônes en bleu */
+}
+
+/* Bouton (Style moderne) */
+.btn-detail, .btn-rando {
+    margin-top: auto;
+    display: inline-block;
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: var(--primary);
+    color: white;
+    font-weight: 600;
+    text-align: center;
+    border-radius: var(--radius-md);
+    transition: background-color 0.2s;
+    font-size: 0.95rem;
+}
+
+.btn-detail:hover, .btn-rando:hover {
+    background-color: var(--primary-hover);
+    color: white;
+}
+
+/* Pagination */
+.pagination {
+    margin-top: 4rem;
+    text-align: center;
+}
+.pagination .page-numbers {
+    display: inline-block;
+    padding: 8px 16px;
+    margin: 0 4px;
+    border-radius: var(--radius-md);
+    background: white;
+    border: 1px solid var(--border-color);
+    font-weight: 600;
+}
+.pagination .current, .pagination a:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+}
+
+/* =========================================
+   3. SINGLE PAGE (Détail Randonnée)
+   ========================================= */
+
+/* Header Single */
+.rando-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.rando-header h1 {
+    font-size: 3rem; /* text-5xl */
+    font-weight: 800;
+    color: var(--text-main);
+    margin-bottom: 1.5rem;
+    line-height: 1.1;
+}
+
+/* Badges Infos Clés (Gros badges en haut) */
+.rando-infos-cles {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+}
+
+.info-badge {
+    background: white;
+    border: 1px solid var(--border-color);
+    padding: 10px 24px;
+    border-radius: 9999px;
+    color: var(--text-main);
+    font-weight: 600;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: var(--shadow-sm);
+}
+
+.info-badge .dashicons {
+    color: var(--primary);
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+/* Image à la une (Hero) */
+.randonnee-image-une img {
+    width: 100%;
+    height: 500px; /* Plus grand sur single */
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-md);
+    margin-bottom: 4rem;
+}
+
+/* Layout Grid (Main + Sidebar) */
+.rando-layout {
+    display: grid;
+    grid-template-columns: 1fr 380px; /* Sidebar fixe à 380px */
+    gap: 4rem;
+    align-items: start; /* Empêche la sidebar de s'étirer */
+}
+
+@media (max-width: 1024px) {
+    .rando-layout {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+}
+
+/* Contenu Principal */
+.rando-main h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid var(--border-color);
+}
+
+.content-body {
+    font-size: 1.125rem; /* text-lg */
+    color: #475569; /* Slate 600 */
+    line-height: 1.8;
+    margin-bottom: 2rem;
+}
+
+.image-supplementaire {
+    margin-top: 3rem;
+}
+.image-supplementaire img {
+    width: 100%;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+/* Sidebar & Box */
+.rando-sidebar aside, .points-interets-box, .map-box {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius-lg);
+    padding: 2rem;
+    box-shadow: var(--shadow-sm); /* Petite ombre propre */
+}
+
+.rando-sidebar h3, .map-box h3 {
+    font-size: 1.25rem;
+    margin-bottom: 1.5rem;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+/* Liste des Points d'intérêt */
+.poi-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.poi-item {
+    padding: 12px 0;
+    border-bottom: 1px dashed var(--border-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.95rem;
+}
+
+.poi-item:last-child {
+    border-bottom: none;
+}
+
+.poi-name {
+    font-weight: 500;
+    color: var(--text-main);
+}
+
+.poi-item.is-difficult .poi-name {
+    font-weight: 600;
+}
+
+/* Badge Difficile (Rouge soft style Tailwind) */
+.badge-difficile {
+    background-color: #fef2f2; /* Red 50 */
+    color: #ef4444;            /* Red 500 */
+    font-size: 0.75rem;
+    padding: 4px 10px;
+    border-radius: 9999px;
+    border: 1px solid #fee2e2;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
